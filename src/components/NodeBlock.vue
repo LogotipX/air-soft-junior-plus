@@ -56,10 +56,6 @@ $node-items-padding: 0 20px;
 
 .node {
   display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 250px;
   height: 129px;
   min-height: 129px;

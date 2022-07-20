@@ -1,7 +1,25 @@
 <template>
-  Array nesting: {{ nodesArrNesting }}
-  <div v-for="node in nodesArr" :key="node" class="nodes__container">
-    <node-block :title="node.title" :isFirstNode="true" :nodes="node.nodes" />
+  <!-- Array nesting: {{ nodesArrNesting }} -->
+  <div class="nodes__container">
+    <ul
+      v-for="nodeLevel in nodesArrNesting"
+      :key="nodeLevel"
+      class="nodes__leveling"
+    >
+      <template v-for="node in structuredNodes" :key="node">
+        <!-- Node title {{ getNodeLevel(node.title) }} -->
+        <li
+          v-if="Number(nodeLevel) === Number(getNodeLevel(node.title))"
+          class="nodes__blocks"
+        >
+          <node-block
+            :title="node.title"
+            :isFirstNode="nodeLevel === 1"
+            :nodes="node.nodes"
+          />
+        </li>
+      </template>
+    </ul>
   </div>
 </template>
 
@@ -16,6 +34,8 @@ export default {
   data() {
     return {
       nodesArrNesting: 0,
+      currentArrLevel: 0,
+      structuredNodes: [],
       nodesArr: [
         {
           nodes: [
@@ -50,29 +70,48 @@ export default {
 
   mounted() {
     this.getArrayNestingLevel(this.nodesArr);
+    this.getArrayOfSelectedLevel();
   },
 
   methods: {
     getArrayNestingLevel(arr, level = 0) {
-      arr.forEach((node) => {
-        if (node.nodes !== null) {
-          level += 1;
-          this.getArrayNestingLevel(node.nodes, level);
-        } else {
-          if (level > this.nodesArrNesting) {
-            this.nodesArrNesting = level;
+      if (Array.isArray(arr)) {
+        arr.forEach((node) => {
+          if (node.nodes !== null) {
+            level += 1;
+            this.getArrayNestingLevel(node.nodes, level);
+          } else {
+            if (level > this.nodesArrNesting) {
+              this.nodesArrNesting = level;
+            }
           }
+        });
+      } else {
+        throw new Error(
+          `Function 'getArrayNestingLevel()' expected first arg type 'Array', got ${typeof arr}`
+        );
+      }
+    },
+
+    getArrayOfSelectedLevel(
+      arr = this.nodesArr
+      // curLvl = this.currentArrLevel
+    ) {
+      arr.forEach((arrNode) => {
+        this.currentArrLevel += 1;
+        this.structuredNodes.push(arrNode);
+        console.log(this.currentArrLevel);
+        console.log(arrNode.title);
+        if (arrNode.nodes !== null) {
+          this.getArrayOfSelectedLevel(arrNode.nodes);
+          this.currentArrLevel -= 2;
+          // console.log(this.structuredNodes);
         }
       });
+    },
 
-      // if (Array.isArray(arr)) {
-      //   level += 1;
-      //   this.getArrayNestingLevel(arr[level], level);
-      // } else {
-      //   throw new Error(
-      //     `Function 'getArrayNestingLevel()' expected first arg type 'Array', got ${typeof arr}`
-      //   );
-      // }
+    getNodeLevel(nodeTitle) {
+      return nodeTitle.split(".").length;
     },
   },
 };
@@ -85,6 +124,7 @@ export default {
   margin: 0;
   padding: 0;
   text-decoration: none;
+  list-style-type: none;
   box-sizing: border-box;
 }
 
@@ -92,8 +132,23 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
-  // color: #2c3e50;
-  // margin-top: 60px;
+}
+
+.nodes__container {
+  display: flex;
+  height: 720px;
+  align-items: center;
+
+  .nodes__leveling {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    margin: 0 2.5%;
+
+    .nodes__blocks {
+      margin: 5% 0;
+    }
+  }
 }
 </style>

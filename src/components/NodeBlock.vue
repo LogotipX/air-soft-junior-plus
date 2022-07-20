@@ -2,19 +2,19 @@
   <div class="node">
     <div class="node__header">
       <div class="header__text">
-        <span>Node {{ count }}</span>
+        <span>{{ title }}</span>
       </div>
     </div>
     <div class="node__container">
       <div class="container__in">
-        <div v-if="typeof node__in === 'number'" class="node__point">
+        <div v-if="!isFirstNode" class="node__point">
           <node-point />
           <div class="node__text">in</div>
         </div>
       </div>
       <div class="container__out">
-        <div class="node__point">
-          <div v-if="typeof node__out === 'number'" class="node__text">out</div>
+        <div v-for="nodePoint of nodes" :key="nodePoint" class="node__point">
+          <div class="node__text">out</div>
           <node-point />
         </div>
       </div>
@@ -29,9 +29,19 @@ export default {
   name: "NodeBlock",
   components: { NodePoint },
   props: {
-    count: Number,
-    node__in: Number,
-    node__out: Number,
+    title: {
+      type: String,
+      require: true,
+    },
+    isFirstNode: {
+      type: Boolean,
+      require: false,
+      default: false,
+    },
+    nodes: {
+      type: Array,
+      require: false,
+    },
   },
 
   data() {

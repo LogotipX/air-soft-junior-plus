@@ -8,14 +8,14 @@
     <div class="node__container">
       <div class="container__in">
         <div v-if="typeof node__in === 'number'" class="node__point">
-          {{ node__in }}
+          <node-point />
           <div class="node__text">in</div>
         </div>
       </div>
       <div class="container__out">
         <div class="node__point">
           <div v-if="typeof node__out === 'number'" class="node__text">out</div>
-          {{ node__out }}
+          <node-point />
         </div>
       </div>
     </div>
@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import NodePoint from "./NodePoint.vue";
+
 export default {
   name: "NodeBlock",
+  components: { NodePoint },
   props: {
     count: Number,
     node__in: Number,

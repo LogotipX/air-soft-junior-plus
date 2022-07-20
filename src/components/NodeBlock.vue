@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "Node",
+  name: "NodeBlock",
   props: {
     count: Number,
     node__in: Number,

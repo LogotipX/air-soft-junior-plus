@@ -1,14 +1,14 @@
 <template>
-  <Node :count="1" :node__in="0" :node__out="1" />
+  <node-block :count="1" :node__in="0" :node__out="1" />
 </template>
 
 <script>
-import Node from "./components/Node.vue";
+import NodeBlock from "./components/NodeBlock.vue";
 
 export default {
   name: "App",
   components: {
-    Node,
+    NodeBlock,
   },
 };
 </script>

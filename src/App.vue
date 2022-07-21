@@ -12,6 +12,7 @@
           :isFirstNode="nodeLevel === 0"
           :nodes="node.nodes"
         />
+        {{ nodeLevel }}
       </li>
     </ul>
   </div>
@@ -29,9 +30,60 @@ export default {
   data() {
     return {
       nodesArrNesting: 0,
-      currentArrLevel: 0,
       structuredNodes: [],
-      nodesArr: [],
+      nodesArr: [
+        // {
+        //   nodes: [
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.1.1.1.1.1" }],
+        //                   title: "4 Node 1.1.1.1.1",
+        //                 },
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.1.1.1.2.1" }],
+        //                   title: "4 Node 1.1.1.1.2",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.1.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.1.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.1",
+        //     },
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.2.1.1.2.1" }],
+        //                   title: "4 Node 1.2.1.1.2",
+        //                 },
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.2.1.1.1.2" }],
+        //                   title: "4 Node 1.2.1.1.1",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.2.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.2.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.2",
+        //     },
+        //   ],
+        //   title: "0 Node 1",
+        // },
+      ],
     };
   },
 
@@ -42,50 +94,39 @@ export default {
   methods: {
     async getNodesArr() {
       const nodesFromApi = await getNodes();
+      // console.log(nodesFromApi);
       this.nodesArr = nodesFromApi;
       this.getArrayNestingLevel(this.nodesArr);
       this.prepareStructuredNodes();
       this.createStructuredNodesArray();
+      // console.log(this.structuredNodes);
     },
 
     getArrayNestingLevel(arr, level = 0) {
       if (Array.isArray(arr)) {
+        level += 1;
         arr.forEach((node) => {
-          if (node.nodes !== null) {
-            level += 1;
-            this.getArrayNestingLevel(node.nodes, level);
-          } else {
-            if (level > this.nodesArrNesting) {
-              this.nodesArrNesting = level;
-            }
-          }
+          this.getArrayNestingLevel(node.nodes, level);
         });
       } else {
-        throw new Error(
-          `Function 'getArrayNestingLevel()' expected first arg type 'Array', got ${typeof arr}`
-        );
+        if (level >= this.nodesArrNesting) {
+          this.nodesArrNesting = level;
+        }
       }
     },
 
     prepareStructuredNodes() {
-      const nestingLevel = this.nodesArrNesting;
-      for (let i = 0; i < nestingLevel; i++) {
+      for (let i = 0; i < this.nodesArrNesting; i++) {
         this.structuredNodes.push([]);
       }
     },
 
-    createStructuredNodesArray(
-      arr = this.nodesArr,
-      curLvl = this.currentArrLevel
-    ) {
+    createStructuredNodesArray(arr = this.nodesArr, curLvl = 0) {
       arr.forEach((arrNode) => {
         this.structuredNodes[curLvl].push(arrNode);
 
         if (arrNode.nodes !== null) {
-          this.currentArrLevel += 1;
-          this.createStructuredNodesArray(arrNode.nodes, this.currentArrLevel);
-        } else {
-          this.currentArrLevel -= 1;
+          this.createStructuredNodesArray(arrNode.nodes, curLvl + 1);
         }
       });
     },

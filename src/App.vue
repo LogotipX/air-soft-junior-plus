@@ -1,24 +1,18 @@
 <template>
-  <!-- Array nesting: {{ nodesArrNesting }} -->
+  Array nesting: {{ nodesArrNesting }}
   <div class="nodes__container">
     <ul
-      v-for="nodeLevel in nodesArrNesting"
-      :key="nodeLevel"
+      v-for="nodeFromLevel in structuredNodes"
+      :key="nodeFromLevel"
       class="nodes__leveling"
     >
-      <template v-for="node in structuredNodes" :key="node">
-        <!-- Node title {{ getNodeLevel(node.title) }} -->
-        <li
-          v-if="Number(nodeLevel) === Number(getNodeLevel(node.title))"
-          class="nodes__blocks"
-        >
-          <node-block
-            :title="node.title"
-            :isFirstNode="nodeLevel === 1"
-            :nodes="node.nodes"
-          />
-        </li>
-      </template>
+      <li v-for="node in nodeFromLevel" :key="node" class="node__blocks">
+        <node-block
+          :title="node.title"
+          :isFirstNode="nodeLevel === 1"
+          :nodes="node.nodes"
+        />
+      </li>
     </ul>
   </div>
 </template>
@@ -50,7 +44,8 @@ export default {
       const nodesFromApi = await getNodes();
       this.nodesArr = nodesFromApi;
       this.getArrayNestingLevel(this.nodesArr);
-      this.getArrayOfSelectedLevel();
+      this.prepareStructuredNodes();
+      this.createStructuredNodesArray();
     },
 
     getArrayNestingLevel(arr, level = 0) {
@@ -72,25 +67,27 @@ export default {
       }
     },
 
-    getArrayOfSelectedLevel(
-      arr = this.nodesArr
-      // curLvl = this.currentArrLevel
-    ) {
-      arr.forEach((arrNode) => {
-        this.currentArrLevel += 1;
-        this.structuredNodes.push(arrNode);
-        console.log(this.currentArrLevel);
-        console.log(arrNode.title);
-        if (arrNode.nodes !== null) {
-          this.getArrayOfSelectedLevel(arrNode.nodes);
-          this.currentArrLevel -= 2;
-          // console.log(this.structuredNodes);
-        }
-      });
+    prepareStructuredNodes() {
+      const nestingLevel = this.nodesArrNesting;
+      for (let i = 0; i < nestingLevel; i++) {
+        this.structuredNodes.push([]);
+      }
     },
 
-    getNodeLevel(nodeTitle) {
-      return nodeTitle.split(".").length;
+    createStructuredNodesArray(
+      arr = this.nodesArr,
+      curLvl = this.currentArrLevel
+    ) {
+      arr.forEach((arrNode) => {
+        this.structuredNodes[curLvl].push(arrNode);
+
+        if (arrNode.nodes !== null) {
+          this.currentArrLevel += 1;
+          this.createStructuredNodesArray(arrNode.nodes, this.currentArrLevel);
+        } else {
+          this.currentArrLevel -= 1;
+        }
+      });
     },
   },
 };

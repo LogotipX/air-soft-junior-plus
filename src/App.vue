@@ -25,6 +25,7 @@
 
 <script>
 import NodeBlock from "./components/NodeBlock.vue";
+import { getNodes } from "./api.js";
 
 export default {
   name: "App",
@@ -36,44 +37,22 @@ export default {
       nodesArrNesting: 0,
       currentArrLevel: 0,
       structuredNodes: [],
-      nodesArr: [
-        {
-          nodes: [
-            {
-              nodes: [
-                {
-                  nodes: null,
-                  title: "Node 1.1.1",
-                },
-              ],
-              title: "Node 1.1",
-            },
-            {
-              nodes: [
-                {
-                  nodes: null,
-                  title: "Node 1.2.1",
-                },
-                {
-                  nodes: null,
-                  title: "Node 1.2.2",
-                },
-              ],
-              title: "Node 1.2",
-            },
-          ],
-          title: "Node 1",
-        },
-      ],
+      nodesArr: [],
     };
   },
 
-  mounted() {
-    this.getArrayNestingLevel(this.nodesArr);
-    this.getArrayOfSelectedLevel();
+  created() {
+    this.getNodesArr();
   },
 
   methods: {
+    async getNodesArr() {
+      const nodesFromApi = await getNodes();
+      this.nodesArr = nodesFromApi;
+      this.getArrayNestingLevel(this.nodesArr);
+      this.getArrayOfSelectedLevel();
+    },
+
     getArrayNestingLevel(arr, level = 0) {
       if (Array.isArray(arr)) {
         arr.forEach((node) => {

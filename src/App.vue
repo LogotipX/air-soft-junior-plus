@@ -2,14 +2,14 @@
   Array nesting: {{ nodesArrNesting }}
   <div class="nodes__container">
     <ul
-      v-for="nodeFromLevel in structuredNodes"
+      v-for="(nodeFromLevel, nodeLevel) in structuredNodes"
       :key="nodeFromLevel"
       class="nodes__leveling"
     >
       <li v-for="node in nodeFromLevel" :key="node" class="node__blocks">
         <node-block
           :title="node.title"
-          :isFirstNode="nodeLevel === 1"
+          :isFirstNode="nodeLevel === 0"
           :nodes="node.nodes"
         />
       </li>

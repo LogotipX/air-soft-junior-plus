@@ -1,8 +1,8 @@
 <template>
   <canvas
     :id="'node-tree-branches' + node.title"
-    width="1920"
-    height="1080"
+    width="3500"
+    height="3500"
   ></canvas>
   <div class="branch">
     <div class="left-node-block">

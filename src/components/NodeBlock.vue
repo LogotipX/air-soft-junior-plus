@@ -8,14 +8,22 @@
     <div class="node__container">
       <div class="container__in">
         <div v-if="!isFirstNode" class="node__point">
-          <node-point />
+          <span ref="inputPoint">
+            <node-point />
+          </span>
           <div class="node__text">in</div>
         </div>
       </div>
       <div class="container__out">
-        <div v-for="nodePoint of nodes" :key="nodePoint" class="node__point">
+        <div
+          v-for="(nodePoint, idx) of nodes"
+          :key="nodePoint"
+          class="node__point"
+        >
           <div class="node__text">out</div>
-          <node-point />
+          <span :ref="'outputPoint' + idx">
+            <node-point />
+          </span>
         </div>
       </div>
     </div>
@@ -44,8 +52,43 @@ export default {
     },
   },
 
+  emits: ["kickUpSelfOutputCoords", "kickUpSelfInputCoords"],
+
   data() {
-    return {};
+    return {
+      outputCoords: [],
+      inputCoords: {},
+    };
+  },
+
+  mounted() {
+    this.getPointsCoords();
+    // this.$emit("getPointsCoords", this.coords);
+    this.$emit("kickUpSelfOutputCoords", this.outputCoords);
+    this.$emit("kickUpSelfInputCoords", this.inputCoords);
+  },
+
+  methods: {
+    getPointsCoords() {
+      this.getOutputPointCoords();
+      this.getInputPointCoords();
+    },
+
+    getInputPointCoords() {
+      const inputPoint = this.$refs.inputPoint;
+      this.inputCoords = inputPoint?.getBoundingClientRect();
+      // console.log("input", this.title, this.inputCoords);
+    },
+
+    getOutputPointCoords() {
+      if (this.nodes !== null) {
+        this.nodes.forEach((node, idx) => {
+          const outputPoint = this.$refs?.["outputPoint" + idx][0];
+          this.outputCoords.push(outputPoint.getBoundingClientRect());
+          // console.log("output", this.title, this.outputCoords[idx]);
+        });
+      }
+    },
   },
 };
 </script>

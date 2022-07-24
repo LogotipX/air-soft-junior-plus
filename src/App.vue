@@ -26,216 +26,216 @@ export default {
       nodesContainerWidth: 0,
       nodesContainerHeight: 0,
       nodesArr: [
-        {
-          nodes: [
-            {
-              nodes: [
-                {
-                  nodes: [
-                    {
-                      nodes: [
-                        {
-                          nodes: [
-                            {
-                              nodes: [
-                                {
-                                  nodes: [
-                                    {
-                                      nodes: null,
-                                      title: "5 Node 1.1.1.1.1.1",
-                                    },
-                                  ],
-                                  title: "4 Node 1.1.1.1.1",
-                                },
-                                {
-                                  nodes: [
-                                    {
-                                      nodes: null,
-                                      title: "5 Node 1.1.1.1.2.1",
-                                    },
-                                  ],
-                                  title: "4 Node 1.1.1.1.2",
-                                },
-                              ],
-                              title: "5 Node 1.1.1.1.1.1",
-                            },
-                          ],
-                          title: "4 Node 1.1.1.1.1",
-                        },
-                        {
-                          nodes: [
-                            {
-                              nodes: [
-                                {
-                                  nodes: [
-                                    {
-                                      nodes: [
-                                        {
-                                          nodes: null,
-                                          title: "5 Node 1.1.1.1.2.1",
-                                        },
-                                      ],
-                                      title: "4 Node 1.1.1.1.2",
-                                    },
-                                  ],
-                                  title: "5 Node 1.1.1.1.1.1",
-                                },
-                              ],
-                              title: "5 Node 1.1.1.1.2.1",
-                            },
-                          ],
-                          title: "4 Node 1.1.1.1.2",
-                        },
-                      ],
-                      title: "3 Node 1.1.1.1",
-                    },
-                  ],
-                  title: "2 Node 1.1.1",
-                },
-              ],
-              title: "1 Node 1.1",
-            },
-            {
-              nodes: [
-                {
-                  nodes: [
-                    {
-                      nodes: [
-                        {
-                          nodes: [{ nodes: null, title: "5 Node 1.2.1.1.1.2" }],
-                          title: "4 Node 1.2.1.1.1",
-                        },
-                      ],
-                      title: "3 Node 1.2.1.1",
-                    },
-                  ],
-                  title: "2 Node 1.2.1",
-                },
-              ],
-              title: "1 Node 1.2",
-            },
-          ],
-          title: "0 Node 1",
-        },
-        {
-          nodes: [
-            {
-              nodes: [
-                {
-                  nodes: [
-                    {
-                      nodes: [
-                        {
-                          nodes: [{ nodes: null, title: "5 Node 1.1.1.1.1.1" }],
-                          title: "4 Node 1.1.1.1.1",
-                        },
-                        {
-                          nodes: [
-                            {
-                              nodes: [
-                                {
-                                  nodes: [
-                                    {
-                                      nodes: [
-                                        {
-                                          nodes: [
-                                            {
-                                              nodes: null,
-                                              title: "5 Node 1.1.1.1.1.1",
-                                            },
-                                          ],
-                                          title: "4 Node 1.1.1.1.1",
-                                        },
-                                        {
-                                          nodes: [
-                                            {
-                                              nodes: null,
-                                              title: "5 Node 1.1.1.1.2.1",
-                                            },
-                                          ],
-                                          title: "4 Node 1.1.1.1.2",
-                                        },
-                                      ],
-                                      title: "5 Node 1.1.1.1.1.1",
-                                    },
-                                  ],
-                                  title: "4 Node 1.1.1.1.1",
-                                },
-                                {
-                                  nodes: [
-                                    {
-                                      nodes: [
-                                        {
-                                          nodes: [
-                                            {
-                                              nodes: null,
-                                              title: "5 Node 1.1.1.1.1.1",
-                                            },
-                                          ],
-                                          title: "4 Node 1.1.1.1.1",
-                                        },
-                                        {
-                                          nodes: [
-                                            {
-                                              nodes: null,
-                                              title: "5 Node 1.1.1.1.2.1",
-                                            },
-                                          ],
-                                          title: "4 Node 1.1.1.1.2",
-                                        },
-                                      ],
-                                      title: "5 Node 1.1.1.1.2.1",
-                                    },
-                                  ],
-                                  title: "4 Node 1.1.1.1.2",
-                                },
-                              ],
-                              title: "5 Node 1.1.1.1.2.1",
-                            },
-                          ],
-                          title: "4 Node 1.1.1.1.2",
-                        },
-                      ],
-                      title: "3 Node 1.1.1.1",
-                    },
-                  ],
-                  title: "2 Node 1.1.1",
-                },
-              ],
-              title: "1 Node 1.1",
-            },
-            {
-              nodes: [
-                {
-                  nodes: [
-                    {
-                      nodes: [
-                        {
-                          nodes: [{ nodes: null, title: "5 Node 1.2.1.1.2.1" }],
-                          title: "4 Node 1.2.1.1.2",
-                        },
-                        {
-                          nodes: [{ nodes: null, title: "5 Node 1.2.1.1.1.2" }],
-                          title: "4 Node 1.2.1.1.1",
-                        },
-                      ],
-                      title: "3 Node 1.2.1.1",
-                    },
-                  ],
-                  title: "2 Node 1.2.1",
-                },
-              ],
-              title: "1 Node 1.2",
-            },
-          ],
-          title: "0 Node 1",
-        },
+        // {
+        //   nodes: [
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [
+        //                     {
+        //                       nodes: [
+        //                         {
+        //                           nodes: [
+        //                             {
+        //                               nodes: null,
+        //                               title: "5 Node 1.1.1.1.1.1",
+        //                             },
+        //                           ],
+        //                           title: "4 Node 1.1.1.1.1",
+        //                         },
+        //                         {
+        //                           nodes: [
+        //                             {
+        //                               nodes: null,
+        //                               title: "5 Node 1.1.1.1.2.1",
+        //                             },
+        //                           ],
+        //                           title: "4 Node 1.1.1.1.2",
+        //                         },
+        //                       ],
+        //                       title: "5 Node 1.1.1.1.1.1",
+        //                     },
+        //                   ],
+        //                   title: "4 Node 1.1.1.1.1",
+        //                 },
+        //                 {
+        //                   nodes: [
+        //                     {
+        //                       nodes: [
+        //                         {
+        //                           nodes: [
+        //                             {
+        //                               nodes: [
+        //                                 {
+        //                                   nodes: null,
+        //                                   title: "5 Node 1.1.1.1.2.1",
+        //                                 },
+        //                               ],
+        //                               title: "4 Node 1.1.1.1.2",
+        //                             },
+        //                           ],
+        //                           title: "5 Node 1.1.1.1.1.1",
+        //                         },
+        //                       ],
+        //                       title: "5 Node 1.1.1.1.2.1",
+        //                     },
+        //                   ],
+        //                   title: "4 Node 1.1.1.1.2",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.1.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.1.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.1",
+        //     },
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.2.1.1.1.2" }],
+        //                   title: "4 Node 1.2.1.1.1",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.2.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.2.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.2",
+        //     },
+        //   ],
+        //   title: "0 Node 1",
+        // },
+        // {
+        //   nodes: [
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.1.1.1.1.1" }],
+        //                   title: "4 Node 1.1.1.1.1",
+        //                 },
+        //                 {
+        //                   nodes: [
+        //                     {
+        //                       nodes: [
+        //                         {
+        //                           nodes: [
+        //                             {
+        //                               nodes: [
+        //                                 {
+        //                                   nodes: [
+        //                                     {
+        //                                       nodes: null,
+        //                                       title: "5 Node 1.1.1.1.1.1",
+        //                                     },
+        //                                   ],
+        //                                   title: "4 Node 1.1.1.1.1",
+        //                                 },
+        //                                 {
+        //                                   nodes: [
+        //                                     {
+        //                                       nodes: null,
+        //                                       title: "5 Node 1.1.1.1.2.1",
+        //                                     },
+        //                                   ],
+        //                                   title: "4 Node 1.1.1.1.2",
+        //                                 },
+        //                               ],
+        //                               title: "5 Node 1.1.1.1.1.1",
+        //                             },
+        //                           ],
+        //                           title: "4 Node 1.1.1.1.1",
+        //                         },
+        //                         {
+        //                           nodes: [
+        //                             {
+        //                               nodes: [
+        //                                 {
+        //                                   nodes: [
+        //                                     {
+        //                                       nodes: null,
+        //                                       title: "5 Node 1.1.1.1.1.1",
+        //                                     },
+        //                                   ],
+        //                                   title: "4 Node 1.1.1.1.1",
+        //                                 },
+        //                                 {
+        //                                   nodes: [
+        //                                     {
+        //                                       nodes: null,
+        //                                       title: "5 Node 1.1.1.1.2.1",
+        //                                     },
+        //                                   ],
+        //                                   title: "4 Node 1.1.1.1.2",
+        //                                 },
+        //                               ],
+        //                               title: "5 Node 1.1.1.1.2.1",
+        //                             },
+        //                           ],
+        //                           title: "4 Node 1.1.1.1.2",
+        //                         },
+        //                       ],
+        //                       title: "5 Node 1.1.1.1.2.1",
+        //                     },
+        //                   ],
+        //                   title: "4 Node 1.1.1.1.2",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.1.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.1.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.1",
+        //     },
+        //     {
+        //       nodes: [
+        //         {
+        //           nodes: [
+        //             {
+        //               nodes: [
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.2.1.1.2.1" }],
+        //                   title: "4 Node 1.2.1.1.2",
+        //                 },
+        //                 {
+        //                   nodes: [{ nodes: null, title: "5 Node 1.2.1.1.1.2" }],
+        //                   title: "4 Node 1.2.1.1.1",
+        //                 },
+        //               ],
+        //               title: "3 Node 1.2.1.1",
+        //             },
+        //           ],
+        //           title: "2 Node 1.2.1",
+        //         },
+        //       ],
+        //       title: "1 Node 1.2",
+        //     },
+        //   ],
+        //   title: "0 Node 1",
+        // },
       ],
     };
   },
 
   created() {
-    // this.getNodesArr();
+    this.getNodesArr();
   },
 
   methods: {
@@ -253,6 +253,18 @@ export default {
       this.$nextTick(() => {
         for (let i = 0; i < selfOutputCoords.length; i++) {
           // console.log(selfOutputCoords[i], childrenInputCoords[i]);
+
+          selfOutputCoords[i].x -=
+            this.$refs.nodesContainer.getBoundingClientRect().x;
+
+          selfOutputCoords[i].y -=
+            this.$refs.nodesContainer.getBoundingClientRect().y;
+
+          childrenInputCoords[i].x -=
+            this.$refs.nodesContainer.getBoundingClientRect().x;
+
+          childrenInputCoords[i].y -=
+            this.$refs.nodesContainer.getBoundingClientRect().y;
 
           this.drawLines(selfOutputCoords[i], childrenInputCoords[i]);
         }
@@ -274,8 +286,8 @@ export default {
           context.lineWidth = 2;
           context.strokeStyle = "#7555f6";
           context.beginPath();
-          context.moveTo(selfOutputCoords.x + 10, selfOutputCoords.y + 7);
-          context.lineTo(childrenInputCoords.x + 1, childrenInputCoords.y + 7);
+          context.moveTo(selfOutputCoords.x + 9, selfOutputCoords.y + 7);
+          context.lineTo(childrenInputCoords.x, childrenInputCoords.y + 7);
           // context.moveTo(50, 50);
           // context.lineTo(0, 0);
           context.closePath();
@@ -311,6 +323,8 @@ export default {
 }
 
 .nodes__container {
+  display: block;
+  position: relative;
   width: fit-content;
   align-items: center;
 }

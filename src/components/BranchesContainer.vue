@@ -1,9 +1,4 @@
 <template>
-  <!-- <canvas
-    :id="'node-tree-branches' + node.title"
-    width="3500"
-    height="3500"
-  ></canvas> -->
   <div class="branch">
     <div class="left-node-block">
       <node-block
@@ -141,8 +136,16 @@ export default {
   align-items: center;
   width: fit-content;
 
-  & > *:not(canvas) {
+  & > * {
     margin: 20px;
+  }
+
+  .left-node-block {
+    margin-right: 75px;
+  }
+
+  .right-node-block {
+    margin-left: 75px;
   }
 }
 </style>

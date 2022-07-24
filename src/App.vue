@@ -1,7 +1,12 @@
 <template>
-  <div class="nodes__container">
+  <div class="nodes__container" ref="nodesContainer">
+    <canvas
+      id="node-tree-branches"
+      :width="nodesContainerWidth"
+      :height="nodesContainerHeight"
+    ></canvas>
     <div v-for="node in nodesArr" :key="node" class="branch">
-      <branches-container :node="node" />
+      <branches-container :node="node" @getAllCoords="constructGraphic" />
     </div>
   </div>
 </template>
@@ -15,8 +20,11 @@ export default {
   components: {
     BranchesContainer,
   },
+
   data() {
     return {
+      nodesContainerWidth: 0,
+      nodesContainerHeight: 0,
       nodesArr: [
         {
           nodes: [
@@ -234,6 +242,53 @@ export default {
     async getNodesArr() {
       this.nodesArr = await getNodes();
     },
+
+    constructGraphic({ selfOutputCoords, childrenInputCoords }) {
+      // this.$nextTick(() => {
+      this.nodesContainerWidth = this.$refs.nodesContainer.clientWidth;
+      this.nodesContainerHeight = this.$refs.nodesContainer.clientHeight;
+      console.log(this.nodesContainerWidth, this.nodesContainerHeight);
+      // });
+
+      this.$nextTick(() => {
+        for (let i = 0; i < selfOutputCoords.length; i++) {
+          // console.log(selfOutputCoords[i], childrenInputCoords[i]);
+
+          this.drawLines(selfOutputCoords[i], childrenInputCoords[i]);
+        }
+      });
+    },
+
+    drawLines(selfOutputCoords, childrenInputCoords) {
+      console.log("drawLine");
+      // console.log("selfOutputCoords", selfOutputCoords);
+      // console.log("childrenInputCords", childrenInputCoords);
+
+      const drawingLine = document.getElementById("node-tree-branches");
+      if (drawingLine && drawingLine.getContext) {
+        const context = drawingLine.getContext("2d");
+
+        if (selfOutputCoords) {
+          // console.log("outputForEach", selfOutputCoords);
+          // selfOutputCoords.forEach((outputPoint) => {
+          context.lineWidth = 2;
+          context.strokeStyle = "#7555f6";
+          context.beginPath();
+          context.moveTo(selfOutputCoords.x + 10, selfOutputCoords.y + 7);
+          context.lineTo(childrenInputCoords.x + 1, childrenInputCoords.y + 7);
+          // context.moveTo(50, 50);
+          // context.lineTo(0, 0);
+          context.closePath();
+          context.stroke();
+
+          // console.log(this.node.title);
+          // console.log("output", selfOutputCoords.x, selfOutputCoords.y);
+          // console.log("input", childrenInputCoords.x, childrenInputCoords.y);
+          // console.log("\n");
+          // });
+        }
+      }
+    },
   },
 };
 </script>
@@ -256,6 +311,16 @@ export default {
 }
 
 .nodes__container {
+  width: fit-content;
   align-items: center;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // background-color: green;
+  z-index: 10;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <canvas
+  <!-- <canvas
     :id="'node-tree-branches' + node.title"
     width="3500"
     height="3500"
-  ></canvas>
+  ></canvas> -->
   <div class="branch">
     <div class="left-node-block">
       <node-block
@@ -25,6 +25,7 @@
             :node="nodeItem"
             :isFirstNode="false"
             @kikUpChildrenInputCoords="getChildrenInputCoords"
+            @getAllCoords="mergeAllCoords"
           />
         </li>
       </template>
@@ -51,70 +52,53 @@ export default {
     },
   },
 
-  emits: ["kikUpChildrenInputCoords"],
+  emits: ["kikUpChildrenInputCoords", "getAllCoords"],
 
   data() {
     return {
       selfOutputCoords: null, //[{}],
       selfInputCoords: null, // {},
       childrenInputCoords: [], //[{}],
+      allCoords: [], //[{}],
     };
   },
 
   methods: {
+    mergeAllCoords(gettedAllCoords) {
+      // console.log(
+      //   "merge",
+      //   this.node.title,
+      //   this.allCoords.length,
+      //   gettedAllCoords.length
+      // );
+
+      // this.allCoords = [
+      //   {
+      //     selfOutputCoords: this.selfOutputCoords,
+      //     childrenInputCoords: this.childrenInputCoords,
+      //   },
+      //   ...gettedAllCoords,
+      // ];
+
+      this.$emit("getAllCoords", gettedAllCoords);
+    },
+
     getSelfOutputCoords(coords) {
-      // console.log("selfOutputCoords", coords);
       this.selfOutputCoords = coords;
     },
 
     getSelfInputCoords(coords) {
-      // console.log("getSelfInputCoords", coords);
       this.selfInputCoords = coords;
       this.$emit("kikUpChildrenInputCoords", this.selfInputCoords);
     },
 
     getChildrenInputCoords(coords) {
-      // console.log("getChildrenInputCoords", coords);
       this.childrenInputCoords.push(coords);
-    },
-
-    drawLine(selfOutputCoords, childrenInputCoords) {
-      console.log("drawLine");
-      console.log("selfOutputCoords", selfOutputCoords);
-      console.log("childrenInputCoords", childrenInputCoords);
-
-      const drawingLine = document.getElementById(
-        "node-tree-branches" + this.node.title
-      );
-
-      if (drawingLine && drawingLine.getContext) {
-        if (selfOutputCoords) {
-          // console.log("outputForEach", selfOutputCoords);
-          // selfOutputCoords.forEach((outputPoint) => {
-          const context = drawingLine.getContext("2d");
-          context.lineWidth = 1;
-          context.strokeStyle = "#7555f6";
-          context.beginPath();
-          context.moveTo(selfOutputCoords.x + 10, selfOutputCoords.y + 7);
-          context.lineTo(childrenInputCoords.x + 1, childrenInputCoords.y + 7);
-          // context.moveTo(50, 50);
-          // context.lineTo(0, 0);
-          context.closePath();
-          context.stroke();
-
-          console.log(this.node.title);
-          console.log("output", selfOutputCoords.x, selfOutputCoords.y);
-          console.log("input", childrenInputCoords.x, childrenInputCoords.y);
-          console.log("\n");
-          // });
-        }
-      }
     },
   },
 
   computed: {
     isGettedAllCoords() {
-      // console.log("isGettedAllCoords", this.isGettedAllCoords);
       return (
         this.selfOutputCoords !== null && this.childrenInputCoords !== null
       );
@@ -123,27 +107,32 @@ export default {
 
   watch: {
     isGettedAllCoords() {
-      // console.log("isGettedAllCoords");
-      this.selfOutputCoords.forEach((selfOutputCoords, idx) => {
-        this.drawLine(selfOutputCoords, this.childrenInputCoords[idx]);
+      // this.selfOutputCoords.forEach((selfOutputCoords, idx) => {
+      //   this.drawLine(selfOutputCoords, this.childrenInputCoords[idx]);
+      // });
+      // this.allCoords.push({
+      //   selfOutputCoords: this.selfOutputCoords,
+      //   childrenInputCoords: this.childrenInputCoords,
+      // });
+      // this.$emit("getAllCoords", this.allCoords);
+      this.$emit("getAllCoords", {
+        selfOutputCoords: this.selfOutputCoords,
+        childrenInputCoords: this.childrenInputCoords,
       });
-      // if (this.isGettedAllCoords) {
-      //   this.drawLine(this.selfOutputCoords, this.childrenInputCoords);
-      // }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  // background-color: green;
-  z-index: 10;
-}
+// canvas {
+//   display: block;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   // background-color: green;
+//   z-index: 10;
+// }
 
 .branch {
   display: flex;
@@ -154,17 +143,6 @@ canvas {
 
   & > *:not(canvas) {
     margin: 20px;
-  }
-
-  & > canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    // background-color: green;
-    // width: 100%;
-    // height: 100%;
-    z-index: 10;
   }
 }
 </style>

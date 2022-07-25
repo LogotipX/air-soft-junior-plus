@@ -95,12 +95,12 @@ export default {
 
 <style lang="scss" scoped>
 $header-height: 45px;
-$node-items-padding: 0 20px;
+$node-items-padding: 20px;
 
 .node {
   display: block;
   width: 250px;
-  height: 129px;
+  // height: 129px;
   min-height: 129px;
   background-color: #fff;
   border-radius: 5px;
@@ -137,7 +137,7 @@ $node-items-padding: 0 20px;
     align-items: center;
     padding: $node-items-padding;
     width: 100%;
-    height: calc(100% - $header-height);
+    min-height: calc(129px - $header-height);
 
     .node__text {
       display: inline;

@@ -63,7 +63,6 @@ export default {
 
   mounted() {
     this.getPointsCoords();
-    // this.$emit("getPointsCoords", this.coords);
     this.$emit("kickUpSelfOutputCoords", this.outputCoords);
     this.$emit("kickUpSelfInputCoords", this.inputCoords);
   },
@@ -77,7 +76,6 @@ export default {
     getInputPointCoords() {
       const inputPoint = this.$refs.inputPoint;
       this.inputCoords = inputPoint?.getBoundingClientRect();
-      // console.log("input", this.title, this.inputCoords);
     },
 
     getOutputPointCoords() {
@@ -85,7 +83,6 @@ export default {
         this.nodes.forEach((node, idx) => {
           const outputPoint = this.$refs?.["outputPoint" + idx][0];
           this.outputCoords.push(outputPoint.getBoundingClientRect());
-          // console.log("output", this.title, this.outputCoords[idx]);
         });
       }
     },
@@ -100,7 +97,6 @@ $node-items-padding: 20px;
 .node {
   display: block;
   width: 250px;
-  // height: 129px;
   min-height: 129px;
   background-color: #fff;
   border-radius: 5px;

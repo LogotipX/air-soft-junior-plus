@@ -20,7 +20,7 @@
             :node="nodeItem"
             :isFirstNode="false"
             @kikUpChildrenInputCoords="getChildrenInputCoords"
-            @getAllCoords="mergeAllCoords"
+            @getAllCoords="bubbleUpAllCoords"
           />
         </li>
       </template>
@@ -59,22 +59,7 @@ export default {
   },
 
   methods: {
-    mergeAllCoords(gettedAllCoords) {
-      // console.log(
-      //   "merge",
-      //   this.node.title,
-      //   this.allCoords.length,
-      //   gettedAllCoords.length
-      // );
-
-      // this.allCoords = [
-      //   {
-      //     selfOutputCoords: this.selfOutputCoords,
-      //     childrenInputCoords: this.childrenInputCoords,
-      //   },
-      //   ...gettedAllCoords,
-      // ];
-
+    bubbleUpAllCoords(gettedAllCoords) {
       this.$emit("getAllCoords", gettedAllCoords);
     },
 
@@ -102,14 +87,6 @@ export default {
 
   watch: {
     isGettedAllCoords() {
-      // this.selfOutputCoords.forEach((selfOutputCoords, idx) => {
-      //   this.drawLine(selfOutputCoords, this.childrenInputCoords[idx]);
-      // });
-      // this.allCoords.push({
-      //   selfOutputCoords: this.selfOutputCoords,
-      //   childrenInputCoords: this.childrenInputCoords,
-      // });
-      // this.$emit("getAllCoords", this.allCoords);
       this.$emit("getAllCoords", {
         selfOutputCoords: this.selfOutputCoords,
         childrenInputCoords: this.childrenInputCoords,
@@ -120,18 +97,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// canvas {
-//   display: block;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   // background-color: green;
-//   z-index: 10;
-// }
 
 .branch {
   display: flex;
-  // position: relative;
   flex-direction: row;
   align-items: center;
   width: fit-content;
